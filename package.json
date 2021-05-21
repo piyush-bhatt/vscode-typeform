@@ -14,7 +14,7 @@
   "bugs": {
     "url": "https://github.com/piyush-bhatt/vscode-typeform/issues"
   },
-  "homepage": "https://github.com/piyush-bhatt/vscode-notion#readme",
+  "homepage": "https://github.com/piyush-bhatt/vscode-typeform#readme",
   "license": "SEE LICENSE IN LICENSE",
   "engines": {
     "vscode": "^1.46.0"
