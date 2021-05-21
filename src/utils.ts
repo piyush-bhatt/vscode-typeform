@@ -7,7 +7,7 @@ export const getTypeformToken = (): string => vscode.workspace.getConfiguration(
 export const setTypeformToken = (val: string) =>
   vscode.workspace.getConfiguration().update("typeform.token", val, vscode.ConfigurationTarget.Global);
 
-const getTypeformFormList = (): Record<string, string>[] =>
+export const getTypeformFormList = (): Record<string, string>[] =>
   vscode.workspace.getConfiguration("typeform").get("formList", []);
 
 export const addToTypeformFormList = (formId: string, formName: string) => {
@@ -18,8 +18,16 @@ export const addToTypeformFormList = (formId: string, formName: string) => {
   } else {
     formList.push({ formId, formName });
   }
-
   vscode.workspace.getConfiguration().update("typeform.formList", formList, vscode.ConfigurationTarget.Global);
+};
+
+export const removeFromTypeformFormList = (formId: string) => {
+  const formList = getTypeformFormList();
+  const index = formList.findIndex((item) => item.formId === formId);
+  if (index !== -1) {
+    formList.splice(index, 1);
+    vscode.workspace.getConfiguration().update("typeform.formList", formList, vscode.ConfigurationTarget.Global);
+  }
 };
 
 export const getQuickInput = (prompt: string, validationErrorMessage: string, value: string = "") =>

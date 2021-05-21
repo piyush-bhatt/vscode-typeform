@@ -56,6 +56,34 @@
         "command": "typeform.addForm",
         "title": "Typeform: Add Form",
         "icon": "$(add)"
+      },
+      {
+        "command": "typeform.form.viewResponses",
+        "title": "View Responses"
+      },
+      {
+        "command": "typeform.form.edit",
+        "title": "Edit",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "typeform.form.delete",
+        "title": "Delete",
+        "icon": "$(trash)"
+      }
+    ],
+    "commandPalette": [
+      {
+        "command": "typeform.form.edit",
+        "when": "false"
+      },
+      {
+        "command": "typeform.form.delete",
+        "when": "false"
+      },
+      {
+        "command": "typeform.form.viewResponses",
+        "when": "false"
       }
     ],
     "viewsContainers": {
@@ -99,6 +127,18 @@
           "command": "typeform.addToken",
           "when": "view == typeform.forms",
           "group": "navigation@1"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "typeform.form.edit",
+          "when": "view == typeform.forms",
+          "group": "inline@0"
+        },
+        {
+          "command": "typeform.form.delete",
+          "when": "view == typeform.forms",
+          "group": "inline@1"
         }
       ]
     }
