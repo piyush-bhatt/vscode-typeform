@@ -34,7 +34,34 @@ export const getResponses = async (id: string) => {
     if (formDetails && Object.keys(formDetails).length > 0) {
       const formResponses = await getFormResponses(id);
       if (formResponses && Object.keys(formResponses).length > 0) {
-        // construct DS
+        const fields = formDetails.fields.map((field: any) => ({ id: field.id, title: field.title }));
+        const responses = formResponses.items.map((item: any) => {
+          return item.answers
+            ? item.answers.map((answer: any) => {
+                if (answer.type === "text") {
+                  return { fieldId: answer.field.id, type: answer.type, value: answer.text };
+                } else if (answer.type === "choice") {
+                  return { fieldId: answer.field.id, type: answer.type, value: answer.choice.label };
+                } else if (answer.type === "email") {
+                  return { fieldId: answer.field.id, type: answer.type, value: answer.email };
+                } else if (answer.type === "url") {
+                  return { fieldId: answer.field.id, type: answer.type, value: answer.url };
+                } else if (answer.type === "file_url") {
+                  return { fieldId: answer.field.id, type: answer.type, value: answer.file_url };
+                } else if (answer.type === "boolean") {
+                  return { fieldId: answer.field.id, type: answer.type, value: answer.boolean };
+                } else if (answer.type === "number") {
+                  return { fieldId: answer.field.id, type: answer.type, value: answer.number };
+                } else if (answer.type === "date") {
+                  return { fieldId: answer.field.id, type: answer.type, value: answer.date };
+                } else if (answer.type === "payment") {
+                  return { fieldId: answer.field.id, type: answer.type, value: answer.payment };
+                }
+                return { fieldId: "", type: "", value: "" };
+              })
+            : [];
+        });
+        return { fields, responses };
       }
     }
   } catch (error) {
