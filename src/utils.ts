@@ -1,32 +1,23 @@
 import * as vscode from "vscode";
+import { getFormDetails, getFormResponses, getForms } from "./api";
 
 export const outputChannel = vscode.window.createOutputChannel("Typeform");
 
 export const getTypeformToken = (): string => vscode.workspace.getConfiguration("typeform").get("token", "");
 
-export const setTypeformToken = (val: string) =>
-  vscode.workspace.getConfiguration().update("typeform.token", val, vscode.ConfigurationTarget.Global);
+export const setTypeformToken = async (val: string) =>
+  await vscode.workspace.getConfiguration().update("typeform.token", val, vscode.ConfigurationTarget.Global);
 
-export const getTypeformFormList = (): Record<string, string>[] =>
-  vscode.workspace.getConfiguration("typeform").get("formList", []);
-
-export const addToTypeformFormList = (formId: string, formName: string) => {
-  const formList = getTypeformFormList();
-  const index = formList.findIndex((item) => item.formId === formId);
-  if (index !== -1) {
-    formList[index]["formName"] = formName;
-  } else {
-    formList.push({ formId, formName });
-  }
-  vscode.workspace.getConfiguration().update("typeform.formList", formList, vscode.ConfigurationTarget.Global);
-};
-
-export const removeFromTypeformFormList = (formId: string) => {
-  const formList = getTypeformFormList();
-  const index = formList.findIndex((item) => item.formId === formId);
-  if (index !== -1) {
-    formList.splice(index, 1);
-    vscode.workspace.getConfiguration().update("typeform.formList", formList, vscode.ConfigurationTarget.Global);
+export const getTypeformFormList = async (): Promise<Record<string, string>[]> => {
+  try {
+    const forms = await getForms();
+    if (forms && forms.items && forms.items.length > 0) {
+      return forms.items.map(({ id, title }: { id: string; title: string }) => ({ id, title }));
+    }
+    return [];
+  } catch (error) {
+    outputChannel.appendLine("Error in fetching form list");
+    return [];
   }
 };
 
@@ -36,3 +27,17 @@ export const getQuickInput = (prompt: string, validationErrorMessage: string, va
     value,
     validateInput: (value: string) => (value === "" ? validationErrorMessage : ""),
   });
+
+export const getResponses = async (id: string) => {
+  try {
+    const formDetails = await getFormDetails(id);
+    if (formDetails && Object.keys(formDetails).length > 0) {
+      const formResponses = await getFormResponses(id);
+      if (formResponses && Object.keys(formResponses).length > 0) {
+        // construct DS
+      }
+    }
+  } catch (error) {
+    outputChannel.appendLine("Error in fetching form details/responses");
+  }
+};

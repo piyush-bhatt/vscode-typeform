@@ -21,13 +21,13 @@ export class FormListProvider implements vscode.TreeDataProvider<FormTreeItem> {
 
   private async getLists(): Promise<FormTreeItem[]> {
     let items: FormTreeItem[];
-    const formList: Record<string, string>[] = getTypeformFormList();
+    const formList: Record<string, string>[] = await getTypeformFormList();
     items = formList.map((item) => {
-      const formTreeItem = new FormTreeItem(item.formName);
+      const formTreeItem = new FormTreeItem(item.title);
       formTreeItem.command = {
         title: "",
         command: "typeform.form.viewResponses",
-        arguments: [item.formId],
+        arguments: [item.id],
       };
       formTreeItem.iconPath = new vscode.ThemeIcon("output");
       return formTreeItem;

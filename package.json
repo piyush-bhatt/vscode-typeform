@@ -38,11 +38,6 @@
           "type": "string",
           "default": "",
           "description": "Typeform Token"
-        },
-        "typeform.formList": {
-          "type": "array",
-          "default": [],
-          "description": "Array of Typeform forms"
         }
       }
     },
@@ -53,34 +48,16 @@
         "icon": "$(gear)"
       },
       {
-        "command": "typeform.addForm",
-        "title": "Typeform: Add Form",
-        "icon": "$(add)"
+        "command": "typeform.refresh",
+        "title": "Typeform: Refresh Forms list",
+        "icon": "$(refresh)"
       },
       {
         "command": "typeform.form.viewResponses",
         "title": "View Responses"
-      },
-      {
-        "command": "typeform.form.edit",
-        "title": "Edit",
-        "icon": "$(edit)"
-      },
-      {
-        "command": "typeform.form.delete",
-        "title": "Delete",
-        "icon": "$(trash)"
       }
     ],
     "commandPalette": [
-      {
-        "command": "typeform.form.edit",
-        "when": "false"
-      },
-      {
-        "command": "typeform.form.delete",
-        "when": "false"
-      },
       {
         "command": "typeform.form.viewResponses",
         "when": "false"
@@ -112,14 +89,13 @@
       },
       {
         "view": "typeform.forms",
-        "contents": "Add a form",
-        "when": "config.typeform.formList == []"
+        "contents": "No forms listed. Check your [Typeform Token](command:typeform.addToken)."
       }
     ],
     "menus": {
       "view/title": [
         {
-          "command": "typeform.addForm",
+          "command": "typeform.refresh",
           "when": "view == typeform.forms",
           "group": "navigation@0"
         },
@@ -127,18 +103,6 @@
           "command": "typeform.addToken",
           "when": "view == typeform.forms",
           "group": "navigation@1"
-        }
-      ],
-      "view/item/context": [
-        {
-          "command": "typeform.form.edit",
-          "when": "view == typeform.forms",
-          "group": "inline@0"
-        },
-        {
-          "command": "typeform.form.delete",
-          "when": "view == typeform.forms",
-          "group": "inline@1"
         }
       ]
     }
@@ -152,16 +116,19 @@
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
-    "@types/vscode": "^1.46.0",
     "@types/glob": "^7.1.3",
     "@types/mocha": "^8.0.0",
     "@types/node": "^14.0.27",
-    "eslint": "^7.6.0",
+    "@types/vscode": "^1.46.0",
     "@typescript-eslint/eslint-plugin": "^3.8.0",
     "@typescript-eslint/parser": "^3.8.0",
+    "eslint": "^7.6.0",
     "glob": "^7.1.6",
     "mocha": "^8.0.1",
     "typescript": "^3.8.3",
     "vscode-test": "^1.4.0"
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
   }
 }

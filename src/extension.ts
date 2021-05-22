@@ -1,11 +1,11 @@
 import * as vscode from "vscode";
+import { updateTypeformAPIAuth } from "./api";
 import { FormListProvider } from "./formList/formListProvider";
 import {
   getQuickInput,
   getTypeformToken,
-  addToTypeformFormList,
   setTypeformToken,
-  removeFromTypeformFormList,
+  getResponses,
 } from "./utils";
 
 export function activate(context: vscode.ExtensionContext) {
@@ -17,47 +17,20 @@ export function activate(context: vscode.ExtensionContext) {
       const token: string = getTypeformToken();
       const userInputToken = await getQuickInput("Enter Typeform Token", "Token can't be empty string", token);
       if (userInputToken) {
-        setTypeformToken(userInputToken);
-      }
-    })
-  );
-  disposables.push(
-    vscode.commands.registerCommand("typeform.addForm", async () => {
-      const formId = await getQuickInput("Enter Typeform Form ID", "Form ID can't be empty");
-      if (formId) {
-        const formName = await getQuickInput("Enter a name to identify the form", "Form Name can't be empty");
-        if (formName) {
-          addToTypeformFormList(formId, formName);
-          formListProvider.refresh();
-        }
-      }
-    })
-  );
-  disposables.push(
-    vscode.commands.registerCommand("typeform.form.edit", async (item: any) => {
-      const formId: string = item.command.arguments[0];
-      const formName: string = item.label;
-      const newFormName = await getQuickInput(
-        "Enter a name to identify the form",
-        "Form Name can't be empty",
-        formName
-      );
-      if (newFormName && formName !== newFormName) {
-        addToTypeformFormList(formId, newFormName);
+        await setTypeformToken(userInputToken);
+        updateTypeformAPIAuth();
         formListProvider.refresh();
       }
     })
   );
   disposables.push(
-    vscode.commands.registerCommand("typeform.form.delete", async (item: any) => {
-      const formId: string = item.command.arguments[0];
-      removeFromTypeformFormList(formId);
+    vscode.commands.registerCommand("typeform.refresh", () => {
       formListProvider.refresh();
     })
   );
   disposables.push(
-    vscode.commands.registerCommand("typeform.form.viewResponses", async (formId: string) => {
-      // view responses
+    vscode.commands.registerCommand("typeform.form.viewResponses", async (id: string) => {
+      const responses = await getResponses(id);
     })
   );
 }
