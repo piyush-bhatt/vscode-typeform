@@ -1,10 +1,12 @@
 import * as vscode from "vscode";
 import { updateTypeformAPIAuth } from "./api";
+import { setContext } from "./context";
 import { FormListProvider } from "./formList/formListProvider";
 import { getQuickInput, getTypeformToken, setTypeformToken, getResponses } from "./utils";
 import ViewLoader from "./webview/ViewLoader";
 
 export function activate(context: vscode.ExtensionContext) {
+  setContext(context);
   let disposables: vscode.Disposable[] = [];
   const formListProvider = new FormListProvider();
   disposables.push(vscode.window.registerTreeDataProvider("typeform.forms", formListProvider));
@@ -28,7 +30,7 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand("typeform.form.viewResponses", async (id: string) => {
       const responses = await getResponses(id);
       if (responses) {
-        const view = new ViewLoader(context);
+        const view = new ViewLoader(responses);
       }
     })
   );
