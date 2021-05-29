@@ -1,5 +1,5 @@
 {
-  "name": "vscode-typeform",
+  "name": "typeform",
   "displayName": "Typeform Responses",
   "description": "Get responses for your typeforms in VSCode",
   "version": "0.0.1",

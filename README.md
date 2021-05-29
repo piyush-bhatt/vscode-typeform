@@ -1,65 +1,33 @@
-# vscode-typeform README
+<p align="center">
+  <img src="https://raw.githubusercontent.com/piyush-bhatt/vscode-typeform/master/media/icon/icon.png" alt="Typeform Responses Logo" /></a>
+</p>
 
-This is the README for your extension "vscode-typeform". After writing up a brief description, we recommend including the following sections.
+> Want to get insights and keep track of responses for your Typeform forms from VSCode itself? [Typeform Responses](https://marketplace.visualstudio.com/items?itemName=piyush-bhatt.typeform) helps you with the same.
 
-## Features
+# Typeform Responses
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+Typeform Responses is a Visual Studio Code extension, primarily focused on providing a way to check insights and responses for your Typeform forms.
 
-For example if there is an image subfolder under your extension project workspace:
+# Settings
 
-\!\[feature X\]\(images/feature-x.png\)
+**Typeform Token:** Required to fetch data from Typeform.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+Find how to get one [here](https://developer.typeform.com/get-started/personal-access-token/).
 
-## Requirements
+# Features
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+### Add Typeform Token
 
-## Extension Settings
+<p align="center">
+  <img src="https://raw.githubusercontent.com/piyush-bhatt/vscode-typeform/master/media/readme/Token.gif" alt="Add Token" />
+</p>
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+### View Insights and Responses for a form
 
-For example:
+<p align="center">
+  <img src="https://raw.githubusercontent.com/piyush-bhatt/vscode-typeform/master/media/readme/View_Responses.gif" alt="View Responses" />
+</p>
 
-This extension contributes the following settings:
+# Licensing
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+[MIT](https://github.com/piyush-bhatt/vscode-typeform/blob/master/LICENSE) licensed
