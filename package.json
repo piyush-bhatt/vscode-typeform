@@ -51,16 +51,6 @@
         "command": "typeform.refresh",
         "title": "Typeform: Refresh Forms list",
         "icon": "$(refresh)"
-      },
-      {
-        "command": "typeform.form.viewResponses",
-        "title": "View Responses"
-      }
-    ],
-    "commandPalette": [
-      {
-        "command": "typeform.form.viewResponses",
-        "when": "false"
       }
     ],
     "viewsContainers": {

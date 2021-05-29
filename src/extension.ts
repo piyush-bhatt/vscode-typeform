@@ -27,11 +27,20 @@ export function activate(context: vscode.ExtensionContext) {
     })
   );
   disposables.push(
-    vscode.commands.registerCommand("typeform.form.viewResponses", async (id: string) => {
-      const responses = await getResponses(id);
-      if (responses) {
-        const view = new ViewLoader(responses);
-      }
+    vscode.commands.registerCommand("typeform.form.viewResponses", async (title: string, id: string) => {
+      await vscode.window.withProgress(
+        { location: vscode.ProgressLocation.Notification, title: "Typeform" },
+        async (progress): Promise<void> => {
+          progress.report({ message: "Fetching Responses" });
+          const responses = await getResponses(id);
+          if (responses) {
+            new ViewLoader(title, responses);
+          }
+          return new Promise(async (resolve, reject) => {
+            resolve();
+          });
+        }
+      );
     })
   );
 }

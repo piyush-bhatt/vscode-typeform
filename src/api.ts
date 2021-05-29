@@ -28,9 +28,9 @@ export const getForms = async () => {
   }
 };
 
-export const getFormDetails = async (id: string) => {
+export const getFormInsights = async (id: string) => {
   try {
-    const res = await typeformAPI.get(`/forms/${id}`);
+    const res = await typeformAPI.get(`/insights/${id}/summary`);
     if (res.status === 200) {
       return res.data;
     }

@@ -27,7 +27,7 @@ export class FormListProvider implements vscode.TreeDataProvider<FormTreeItem> {
       formTreeItem.command = {
         title: "",
         command: "typeform.form.viewResponses",
-        arguments: [item.id],
+        arguments: [item.title, item.id],
       };
       formTreeItem.iconPath = new vscode.ThemeIcon("output");
       return formTreeItem;

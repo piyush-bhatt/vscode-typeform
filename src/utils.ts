@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { getFormDetails, getFormResponses, getForms } from "./api";
+import { getFormInsights, getFormResponses, getForms } from "./api";
 
 export const outputChannel = vscode.window.createOutputChannel("Typeform");
 
@@ -30,11 +30,13 @@ export const getQuickInput = (prompt: string, validationErrorMessage: string, va
 
 export const getResponses = async (id: string) => {
   try {
-    const formDetails = await getFormDetails(id);
-    if (formDetails && Object.keys(formDetails).length > 0) {
+    const formInsights = await getFormInsights(id);
+    if (formInsights && Object.keys(formInsights).length > 0) {
       const formResponses = await getFormResponses(id);
       if (formResponses && Object.keys(formResponses).length > 0) {
-        const fields = formDetails.fields.map((field: any) => ({ id: field.id, title: field.title }));
+        const fields = formInsights.fields.map((field: any) => ({ id: field.id, title: field.title }));
+        const summary = formInsights.form.summary;
+        summary["platforms"] = formInsights.form.platforms;
         const responses = formResponses.items.map((item: any) => {
           return item.answers
             ? item.answers.map((answer: any) => {
@@ -61,7 +63,7 @@ export const getResponses = async (id: string) => {
               })
             : [];
         });
-        return { fields, responses };
+        return { fields, summary, responses };
       }
     }
   } catch (error) {
