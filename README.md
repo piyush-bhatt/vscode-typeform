@@ -19,7 +19,7 @@ Find how to get one [here](https://developer.typeform.com/get-started/personal-a
 ### Add Typeform Token
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/piyush-bhatt/vscode-typeform/master/media/readme/Token.gif" alt="Add Token" />
+  <img src="https://raw.githubusercontent.com/piyush-bhatt/vscode-typeform/master/media/readme/Add_Token.gif" alt="Add Token" />
 </p>
 
 ### View Insights and Responses for a form
